@@ -11,7 +11,7 @@
  */
 (function($){
 
-    var ios, ie9, overlayColor, overlay, vwrap, container, content, core, dest, top, sonH, finH, margine, prima, framewidth, frameheight, border, bgcolor, type, thisgall, items, thenext, theprev, title, nextok, prevok, keyNavigationDisabled, blocktitle, blocknum, numeratio, evitanext, evitaprev, evitacontent, figliall, infinigall;
+    var ios, ie9, overlayColor, overlay, vwrap, container, content, core, dest, top, sonH, finH, margine, prima, framewidth, frameheight, attributes, border, bgcolor, type, thisgall, items, thenext, theprev, title, nextok, prevok, keyNavigationDisabled, blocktitle, blocknum, numeratio, evitanext, evitaprev, evitacontent, figliall, infinigall;
 
     $.fn.extend({
         //plugin name - venobox
@@ -21,6 +21,7 @@
           var defaults = {
               framewidth: '',
               frameheight: '',
+              attributes: {},
               border: '0',
               bgcolor: '#fff',
               numeratio: false,
@@ -38,6 +39,8 @@
                   obj.data('bgcolor', options.bgcolor);
                   obj.data('numeratio', options.numeratio);
                   obj.data('infinigall', options.infinigall);
+                  
+                  attributes = options.attributes;
 
                   ios = (navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false);
 
@@ -441,7 +444,7 @@
       cache: false
       })
       .done(function( msg ) {
-          content.html('<div class="vbox-inline">'+ msg +'</div>');
+          content.html(applyAttributes('<div class="vbox-inline">'+ msg +'</div>'));
           updateoverlay(true);
 
       }) .fail(function() {
@@ -449,10 +452,20 @@
           updateoverlay(true);
       })
     }
+    
+    function applyAttributes(html) {
+      var element = $(html);
+      
+      $.each(attributes, function(name, value) {
+        element.attr(name, value);
+      });
+        
+      return element;
+    }
 
     /* -------- LOAD IFRAME -------- */
     function loadIframe(){
-      content.html('<iframe class="venoframe" src="'+dest+'"></iframe>');
+      content.html(applyAttributes('<iframe class="venoframe" src="'+dest+'"></iframe>'));
     //  $('.venoframe').load(function(){ // valid only for iFrames in same domain
       updateoverlay();
     //  });
@@ -462,7 +475,7 @@
     function loadVimeo(){
       var pezzi = dest.split('/');
       var videoid = pezzi[pezzi.length-1];
-      content.html('<iframe class="venoframe" src="http://player.vimeo.com/video/'+videoid+'"></iframe>')
+      content.html(applyAttributes('<iframe class="venoframe" src="http://player.vimeo.com/video/'+videoid+'"></iframe>'));
       updateoverlay();
     }
 
@@ -470,13 +483,13 @@
     function loadYoutube(){
       var pezzi = dest.split('/');
       var videoid = pezzi[pezzi.length-1];
-      content.html('<iframe class="venoframe" src="http://www.youtube.com/embed/'+videoid+'"></iframe>')
+      content.html(applyAttributes('<iframe class="venoframe" src="http://www.youtube.com/embed/'+videoid+'"></iframe>'));
       updateoverlay();
     }
     
     /* -------- LOAD INLINE -------- */
     function loadInline(){
-      content.html('<div class="vbox-inline">'+$(dest).html()+'</div>');
+      content.html(applyAttributes('<div class="vbox-inline">'+$(dest).html()+'</div>'));
       updateoverlay();
     }
 

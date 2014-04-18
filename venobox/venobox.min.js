@@ -1,8 +1,9 @@
 /* 
  * VenoBox - jQuery Plugin
- * version: 1.3.3
+ * version: 1.3.3.1
  * @requires jQuery
- *
+ * @fork https://github.com/neuralquery/VenoBox
+ * 
  * Examples at http://lab.veno.it/venobox/
  * License: Creative Commons Attribution 3.0 License
  * License URI: http://creativecommons.org/licenses/by/3.0/

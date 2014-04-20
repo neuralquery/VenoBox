@@ -40,9 +40,8 @@
                   obj.data('bgcolor', options.bgcolor);
                   obj.data('numeratio', options.numeratio);
                   obj.data('infinigall', options.infinigall);
+                  obj.data('attributes', options.attributes);
                   
-                  attributes = options.attributes;
-
                   ios = (navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false);
 
                   // Idiot Explorer 9 or less
@@ -55,6 +54,7 @@
                     overlayColor = obj.data('overlay');
                     framewidth = obj.data('framewidth');
                     frameheight = obj.data('frameheight');
+                    attributes = obj.data('attributes');
                     border = obj.data('border');
                     bgcolor = obj.data('bgcolor');
                     nextok = false;
